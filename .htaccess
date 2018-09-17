@@ -1,0 +1,19 @@
+RewriteOptions inherit
+# For security reasons, Option followsymlinks cannot be overridden.
+#Options +FollowSymLinks 
+Options -MultiViews
+Options +SymLinksIfOwnerMatch
+RewriteEngine On
+rewritecond %{http_host} ^dipos.in [nc]
+rewriterule ^(.*)$ http://www.dipos.in/demo/$1 [r=301,nc]
+Options -Indexes
+#Protect the .htaccess File
+<files .htaccess="">
+order allow,deny
+deny from all
+</files>
+#RewriteBase /demo/
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteRule ^([^.]*[^./])$ /$1.html [R=301,L]
+RewriteRule ^home$ /index.php [L]
